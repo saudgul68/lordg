@@ -9,17 +9,19 @@ export function BlogList({ posts }: { posts: BlogPost[] }) {
   const rest = posts.filter((p) => p.slug !== featured.slug)
 
   return (
-    <section className="bg-background py-20 sm:py-24">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+    <section className="relative overflow-hidden bg-background py-24 sm:py-28">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,168,106,0.04),transparent_60%)]" />
+
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <FeaturedPost post={featured} />
 
-        <div className="mt-20">
+        <div className="mt-24">
           <Reveal>
             <SectionHeading
               eyebrow="Latest Insights"
               title="News & Stories"
               align="left"
-              className="mb-10"
+              className="mb-12"
             />
           </Reveal>
 

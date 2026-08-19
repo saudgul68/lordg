@@ -24,36 +24,38 @@ const details = [
 
 export function ContactSection() {
   return (
-    <section className="bg-background py-24">
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-5 lg:gap-16">
+    <section className="relative overflow-hidden bg-background py-28">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,168,106,0.04),transparent_60%)]" />
+
+      <div className="relative mx-auto grid max-w-6xl gap-16 px-5 sm:px-8 lg:grid-cols-5 lg:gap-20">
         <div className="lg:col-span-2">
           <Reveal>
-            <span className="text-xs font-semibold uppercase tracking-[0.35em] text-accent">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-accent">
               Get in Touch
             </span>
-            <h2 className="mt-3 font-serif text-3xl font-semibold text-balance sm:text-4xl">
+            <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-balance sm:text-5xl">
               We&apos;d love to hear from you
             </h2>
-            <span className="mt-5 block h-px w-16 bg-accent" />
-            <p className="mt-6 leading-relaxed text-muted-foreground">
+            <div className="mt-5 h-1 w-20 rounded-full bg-gradient-to-r from-accent to-accent/30" />
+            <p className="mt-8 leading-relaxed text-muted-foreground">
               For business enquiries, investment opportunities or philanthropic
               partnerships with the office of Lord Neil Benjamin Gibson, reach out
               using the details below or send a message directly.
             </p>
           </Reveal>
 
-          <StaggerGroup className="mt-10 space-y-6">
+          <StaggerGroup className="mt-12 space-y-6">
             {details.map(({ Icon, label, lines, href }) => (
               <StaggerItem key={label}>
-                <li className="flex gap-4">
-                  <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground transition-transform hover:scale-110">
+                <div className="group flex gap-4">
+                  <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/15 transition-all duration-300 group-hover:scale-110 group-hover:bg-accent group-hover:text-accent-foreground">
                     <Icon className="size-5" />
                   </span>
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                       {label}
                     </p>
-                    <div className="mt-1 text-sm leading-relaxed text-foreground">
+                    <div className="mt-1.5 text-sm leading-relaxed text-foreground">
                       {href ? (
                         <a href={href} className="transition-colors hover:text-accent">
                           {lines.join(' ')}
@@ -63,7 +65,7 @@ export function ContactSection() {
                       )}
                     </div>
                   </div>
-                </li>
+                </div>
               </StaggerItem>
             ))}
           </StaggerGroup>

@@ -1,31 +1,58 @@
 import Image from 'next/image'
+import { Calendar, MapPin, Landmark } from 'lucide-react'
 import { Reveal } from '@/components/motion/reveal'
+
+const facts = [
+  { Icon: Calendar, label: 'Born', value: 'September 10th, 1963' },
+  { Icon: MapPin, label: 'Location', value: 'West Yorkshire, England' },
+  { Icon: Landmark, label: 'Built', value: 'Palladian style, 1767' },
+]
 
 export function WarterPriory() {
   return (
-    <section className="bg-secondary/50 py-24">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
+    <section className="relative overflow-hidden bg-secondary/40 py-28">
+      <div className="mx-auto grid max-w-6xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-2">
         <Reveal direction="left">
-          <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl shadow-xl ring-1 ring-border">
+          <div className="group relative aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl ring-1 ring-border">
             <Image
               src="/walton-hall.png"
               alt="Walton Hall, a Palladian mansion on an island lake in West Yorkshire"
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="object-cover transition-transform duration-[1.2s] group-hover:scale-110"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
+
+            <div className="absolute bottom-6 left-6 right-6 flex flex-wrap gap-3">
+              {facts.map(({ Icon, label, value }) => (
+                <div
+                  key={label}
+                  className="flex items-center gap-2.5 rounded-xl border border-white/15 bg-primary/40 px-3.5 py-2.5 backdrop-blur-md"
+                >
+                  <Icon className="size-4 shrink-0 text-accent" />
+                  <div className="flex flex-col leading-tight">
+                    <span className="text-[0.65rem] font-medium uppercase tracking-wider text-primary-foreground/60">
+                      {label}
+                    </span>
+                    <span className="text-xs font-semibold text-primary-foreground">
+                      {value}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </Reveal>
 
         <Reveal direction="right" delay={0.15}>
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.35em] text-accent">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-accent">
               Heritage
             </span>
-            <h2 className="mt-3 font-serif text-3xl font-semibold text-balance sm:text-4xl">
+            <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-balance sm:text-5xl">
               Warter Priory &amp; Wheldrake
             </h2>
-            <span className="mt-5 block h-px w-16 bg-accent" />
-            <div className="mt-6 space-y-4 leading-relaxed text-muted-foreground">
+            <div className="mt-5 h-1 w-20 rounded-full bg-gradient-to-r from-accent to-accent/30" />
+            <div className="mt-8 space-y-5 leading-relaxed text-muted-foreground">
               <p>
                 Lord Neil B. Gibson&apos;s journey started at his birth in Walton
                 Hall. He was born on September 10th, 1963. Later in life, through

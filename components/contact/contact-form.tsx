@@ -2,11 +2,11 @@
 
 import { useState, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { CheckCircle2, Send } from 'lucide-react'
+import { CircleCheck as CheckCircle2, Send } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const fieldClass =
-  'w-full rounded-lg border border-input bg-card px-4 py-3 text-sm text-foreground shadow-sm outline-none transition-all placeholder:text-muted-foreground/70 focus:border-accent focus:ring-2 focus:ring-accent/30 hover:border-accent/50'
+  'w-full rounded-xl border border-input bg-card px-4 py-3.5 text-sm text-foreground shadow-sm outline-none transition-all placeholder:text-muted-foreground/60 focus:border-accent focus:ring-2 focus:ring-accent/20 hover:border-accent/40'
 
 export function ContactForm() {
   const [sent, setSent] = useState(false)
@@ -25,24 +25,25 @@ export function ContactForm() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-12 text-center shadow-sm"
+          className="relative flex flex-col items-center justify-center overflow-hidden rounded-3xl border border-border bg-card p-14 text-center card-glow"
         >
+          <div className="absolute -right-12 -top-12 size-48 rounded-full bg-accent/5 blur-2xl" />
           <motion.span
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ delay: 0.2, type: 'spring', stiffness: 200, damping: 15 }}
-            className="mb-5 inline-flex size-14 items-center justify-center rounded-full bg-accent/15 text-accent"
+            className="relative mb-6 inline-flex size-16 items-center justify-center rounded-full bg-accent/15 text-accent"
           >
-            <CheckCircle2 className="size-7" />
+            <CheckCircle2 className="size-8" />
           </motion.span>
-          <h3 className="font-serif text-2xl font-semibold">Message received</h3>
-          <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
+          <h3 className="relative font-serif text-3xl font-semibold">Message received</h3>
+          <p className="relative mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
             Thank you for reaching out. A member of the Lord Gibson UK office will
             be in touch with you shortly.
           </p>
           <Button
             variant="outline"
-            className="mt-6 rounded-full border-primary/25 bg-transparent"
+            className="relative mt-8 rounded-full border-primary/20 bg-transparent"
             onClick={() => setSent(false)}
           >
             Send another message
@@ -56,7 +57,7 @@ export function ContactForm() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="rounded-2xl border border-border bg-card p-8 shadow-sm"
+          className="rounded-3xl border border-border bg-card p-8 card-glow sm:p-10"
         >
           <div className="grid gap-5 sm:grid-cols-2">
             <motion.div
@@ -135,10 +136,10 @@ export function ContactForm() {
             <Button
               type="submit"
               size="lg"
-              className="mt-6 h-12 w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 sm:w-auto sm:px-8"
+              className="group mt-7 h-13 w-full rounded-full bg-primary px-8 text-base text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/25 sm:w-auto"
             >
               Send Message
-              <Send className="size-4" />
+              <Send className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Button>
           </motion.div>
         </motion.form>

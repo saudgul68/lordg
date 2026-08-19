@@ -28,6 +28,7 @@ export function SiteHeader() {
   useMotionValueEvent(scrollY, 'change', (latest) => {
     const prev = prevY
     setPrevY(latest)
+    setScrolled(latest > 12)
     if (latest > 200 && latest > prev) {
       setHidden(true)
     } else {
@@ -48,10 +49,10 @@ export function SiteHeader() {
       animate={{ y: hidden ? -100 : 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        'sticky top-0 z-50 transition-all duration-300',
+        'sticky top-0 z-50 transition-all duration-500',
         scrolled
-          ? 'border-b border-border/70 bg-background/85 backdrop-blur-xl shadow-[0_4px_30px_-12px_rgba(0,0,0,0.25)]'
-          : 'border-b border-transparent bg-background/50 backdrop-blur-md',
+          ? 'border-b border-border/60 glass shadow-[0_4px_30px_-12px_rgba(0,0,0,0.2)]'
+          : 'border-b border-transparent bg-background/40 backdrop-blur-sm',
       )}
     >
       <motion.div
@@ -68,7 +69,7 @@ export function SiteHeader() {
         </motion.div>
 
         <nav
-          className="hidden items-center md:flex"
+          className="hidden items-center rounded-full border border-border/50 bg-card/50 p-1 backdrop-blur-sm md:flex"
           aria-label="Primary"
           onMouseLeave={() => setHovered(null)}
         >
@@ -80,25 +81,25 @@ export function SiteHeader() {
                 href={link.href}
                 onMouseEnter={() => setHovered(link.href)}
                 className={cn(
-                  'relative px-4 py-2 text-sm font-medium tracking-wide transition-colors',
-                  active ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
+                  'relative rounded-full px-5 py-2 text-sm font-medium tracking-wide transition-colors',
+                  active ? 'text-primary-foreground' : 'text-muted-foreground hover:text-foreground',
                 )}
               >
-                {hovered === link.href && (
+                {hovered === link.href && !active && (
                   <motion.span
                     layoutId="nav-hover"
                     className="absolute inset-0 -z-10 rounded-full bg-secondary"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
-                {link.label}
                 {active && (
                   <motion.span
-                    layoutId="nav-underline"
-                    className="absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full bg-accent"
+                    layoutId="nav-active"
+                    className="absolute inset-0 -z-10 rounded-full bg-primary shadow-sm"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
+                {link.label}
               </Link>
             )
           })}
@@ -107,7 +108,7 @@ export function SiteHeader() {
         <div className="hidden md:block">
           <Button
             size="lg"
-            className="h-10 rounded-full bg-primary px-6 text-primary-foreground hover:bg-primary/90"
+            className="h-11 rounded-full bg-accent px-6 text-sm font-semibold text-accent-foreground shadow-md shadow-accent/20 hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/30"
             render={<Link href="/contact" />}
           >
             Get in touch
@@ -116,7 +117,7 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="inline-flex size-10 items-center justify-center rounded-md text-foreground md:hidden"
+          className="inline-flex size-10 items-center justify-center rounded-xl border border-border/50 bg-card/50 text-foreground backdrop-blur-sm md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
@@ -154,7 +155,7 @@ export function SiteHeader() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-border/70 bg-background md:hidden"
+            className="overflow-hidden border-t border-border/60 glass md:hidden"
           >
             <nav
               className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4 sm:px-8"
@@ -171,10 +172,10 @@ export function SiteHeader() {
                     href={link.href}
                     onClick={() => setOpen(false)}
                     className={cn(
-                      'block rounded-md px-3 py-3 text-base font-medium transition-colors',
+                      'block rounded-xl px-4 py-3 text-base font-medium transition-colors',
                       isActive(link.href)
-                        ? 'bg-secondary text-foreground'
-                        : 'text-muted-foreground hover:bg-secondary/60',
+                        ? 'bg-primary text-primary-foreground'
+                        : 'text-muted-foreground hover:bg-secondary',
                     )}
                   >
                     {link.label}
@@ -184,7 +185,7 @@ export function SiteHeader() {
               <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className="mt-2 rounded-full bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground"
+                className="mt-2 rounded-full bg-accent px-4 py-3 text-center text-sm font-semibold text-accent-foreground"
               >
                 Get in touch
               </Link>
