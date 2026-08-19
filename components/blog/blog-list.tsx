@@ -1,5 +1,5 @@
 import { SectionHeading } from '@/components/section-heading'
-import { StaggerGroup, StaggerItem } from '@/components/motion/reveal'
+import { Reveal, StaggerGroup, StaggerItem } from '@/components/motion/reveal'
 import { FeaturedPost } from '@/components/blog/featured-post'
 import { BlogCard } from '@/components/blog/blog-card'
 import type { BlogPost } from '@/lib/blog'
@@ -14,12 +14,14 @@ export function BlogList({ posts }: { posts: BlogPost[] }) {
         <FeaturedPost post={featured} />
 
         <div className="mt-20">
-          <SectionHeading
-            eyebrow="Latest Insights"
-            title="News & Stories"
-            align="left"
-            className="mb-10"
-          />
+          <Reveal>
+            <SectionHeading
+              eyebrow="Latest Insights"
+              title="News & Stories"
+              align="left"
+              className="mb-10"
+            />
+          </Reveal>
 
           <StaggerGroup className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((post) => (

@@ -9,7 +9,8 @@ import type { BlogPost } from '@/lib/blog'
 export function ArticleHeader({ post }: { post: BlogPost }) {
   return (
     <section className="relative overflow-hidden bg-primary pt-28 pb-16 sm:pt-32">
-      <div className="mx-auto max-w-3xl px-5 sm:px-8">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(201,168,106,0.08),transparent_60%)]" />
+      <div className="relative mx-auto max-w-3xl px-5 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -19,7 +20,7 @@ export function ArticleHeader({ post }: { post: BlogPost }) {
             href="/blog"
             className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-primary-foreground/70 transition-colors hover:text-accent"
           >
-            <ArrowLeft className="size-4" />
+            <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
             Back to Blog
           </Link>
         </motion.div>
@@ -60,19 +61,19 @@ export function ArticleHeader({ post }: { post: BlogPost }) {
         </motion.div>
       </div>
 
-      <div className="mx-auto mt-12 max-w-4xl px-5 sm:px-8">
+      <div className="relative mx-auto mt-12 max-w-4xl px-5 sm:px-8">
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10"
+          className="group relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10"
         >
           <Image
             src={post.image || "/placeholder.svg"}
             alt={post.imageAlt}
             fill
             priority
-            className="object-cover"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
         </motion.div>
       </div>

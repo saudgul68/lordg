@@ -12,7 +12,7 @@ export function FeaturedPost({ post }: { post: BlogPost }) {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="group grid overflow-hidden rounded-2xl border border-border bg-card lg:grid-cols-2"
+      className="group grid overflow-hidden rounded-2xl border border-border bg-card transition-shadow hover:shadow-xl lg:grid-cols-2"
     >
       <Link href={`/blog/${post.slug}`} className="relative aspect-[16/10] overflow-hidden lg:aspect-auto">
         <Image
@@ -52,7 +52,7 @@ export function FeaturedPost({ post }: { post: BlogPost }) {
 
         <Link
           href={`/blog/${post.slug}`}
-          className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+          className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:gap-3"
         >
           Read the story
           <ArrowUpRight className="size-4" />

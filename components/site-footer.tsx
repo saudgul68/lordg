@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { motion } from 'motion/react'
 import { MapPin, Phone, Mail } from 'lucide-react'
 import { Logo } from '@/components/logo'
 
@@ -41,8 +44,15 @@ const socials = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 md:grid-cols-3">
+    <footer className="relative overflow-hidden bg-primary text-primary-foreground">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(201,168,106,0.06),transparent_50%)]" />
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="relative mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 md:grid-cols-3"
+      >
         <div>
           <Logo inverted />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-primary-foreground/70">
@@ -54,15 +64,20 @@ export function SiteFooter() {
             Dubai, UAE.
           </p>
           <div className="mt-6 flex gap-3">
-            {socials.map(({ href, label, Icon }) => (
-              <a
+            {socials.map(({ href, label, Icon }, i) => (
+              <motion.a
                 key={label}
                 href={href}
                 aria-label={label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 + i * 0.1, type: 'spring', stiffness: 200, damping: 15 }}
+                whileHover={{ y: -3, scale: 1.1 }}
                 className="inline-flex size-10 items-center justify-center rounded-full border border-primary-foreground/20 text-primary-foreground/80 transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground"
               >
                 <Icon className="size-4" />
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>
@@ -76,7 +91,7 @@ export function SiteFooter() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-primary-foreground/75 transition-colors hover:text-primary-foreground"
+                  className="text-primary-foreground/75 transition-colors hover:text-primary-foreground hover:pl-1"
                 >
                   {link.label}
                 </Link>
@@ -114,9 +129,9 @@ export function SiteFooter() {
             </li>
           </ul>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="border-t border-primary-foreground/15">
+      <div className="relative border-t border-primary-foreground/15">
         <div className="mx-auto max-w-6xl px-5 py-6 text-xs text-primary-foreground/55 sm:px-8">
           © {new Date().getFullYear()} All Rights Reserved · Lord Gibson UK
         </div>

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react'
 import { Menu, X } from 'lucide-react'
 import { Logo } from '@/components/logo'
 import { Button } from '@/components/ui/button'
@@ -20,14 +20,24 @@ export function SiteHeader() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [hovered, setHovered] = useState<string | null>(null)
+  const { scrollY } = useScroll()
+  const [prevY, setPrevY] = useState(0)
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    const prev = prevY
+    setPrevY(latest)
+    if (latest > 200 && latest > prev) {
+      setHidden(true)
+    } else {
+      setHidden(false)
+    }
+  })
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    setOpen(false)
+  }, [pathname])
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href)
@@ -35,22 +45,27 @@ export function SiteHeader() {
   return (
     <motion.header
       initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      animate={{ y: hidden ? -100 : 0, opacity: 1 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
         'sticky top-0 z-50 transition-all duration-300',
         scrolled
-          ? 'border-b border-border/70 bg-background/90 backdrop-blur-md shadow-[0_2px_20px_-12px_rgba(0,0,0,0.3)]'
-          : 'border-b border-transparent bg-background/60 backdrop-blur-sm',
+          ? 'border-b border-border/70 bg-background/85 backdrop-blur-xl shadow-[0_4px_30px_-12px_rgba(0,0,0,0.25)]'
+          : 'border-b border-transparent bg-background/50 backdrop-blur-md',
       )}
     >
-      <div
+      <motion.div
         className={cn(
           'mx-auto flex max-w-6xl items-center justify-between px-5 transition-all duration-300 sm:px-8',
           scrolled ? 'h-16' : 'h-20',
         )}
       >
-        <Logo />
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+        >
+          <Logo />
+        </motion.div>
 
         <nav
           className="hidden items-center md:flex"
@@ -130,7 +145,7 @@ export function SiteHeader() {
             )}
           </AnimatePresence>
         </button>
-      </div>
+      </motion.div>
 
       <AnimatePresence>
         {open && (

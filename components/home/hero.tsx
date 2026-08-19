@@ -2,9 +2,10 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, type Variants } from 'motion/react'
+import { motion, type Variants, useScroll, useTransform } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useRef } from 'react'
 
 const container: Variants = {
   hidden: {},
@@ -21,13 +22,23 @@ const item: Variants = {
 }
 
 export function Hero() {
+  const ref = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  })
+  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+
   return (
-    <section className="relative overflow-hidden">
+    <section ref={ref} className="relative overflow-hidden">
       <motion.div
         className="absolute inset-0"
         initial={{ scale: 1.12 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+        style={{ y: imageY }}
       >
         <Image
           src="/estate-hero.png"
@@ -44,6 +55,7 @@ export function Hero() {
         variants={container}
         initial="hidden"
         animate="visible"
+        style={{ y: contentY, opacity: contentOpacity }}
       >
         <motion.span
           variants={item}

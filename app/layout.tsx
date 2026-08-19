@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Inter, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
+import { ScrollProgress } from '@/components/motion/scroll-progress'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -40,6 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable} bg-background`}>
       <body className="font-sans antialiased">
+        <ScrollProgress />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

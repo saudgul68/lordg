@@ -74,8 +74,20 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
 }
 
 @utility text-balance {
   text-wrap: balance;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }

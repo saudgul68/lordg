@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Reveal } from '@/components/motion/reveal'
+import { Reveal, StaggerGroup, StaggerItem } from '@/components/motion/reveal'
 import { BlogCard } from '@/components/blog/blog-card'
 import { SectionHeading } from '@/components/section-heading'
 import type { BlogPost } from '@/lib/blog'
@@ -31,13 +31,13 @@ export function ArticleBody({
         </article>
 
         <Reveal className="mt-12">
-          <div className="rounded-xl border border-border bg-secondary/60 p-8 text-center">
+          <div className="rounded-xl border border-border bg-secondary/60 p-8 text-center transition-shadow hover:shadow-lg">
             <p className="font-serif text-xl text-balance text-foreground">
               Interested in partnering with LNBG International Investments?
             </p>
             <Link
               href="/contact"
-              className="mt-5 inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+              className="mt-5 inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:gap-3 gap-2"
             >
               Get in touch
             </Link>
@@ -47,17 +47,21 @@ export function ArticleBody({
 
       {related.length > 0 && (
         <div className="mx-auto mt-20 max-w-6xl px-5 sm:px-8">
-          <SectionHeading
-            eyebrow="Keep Reading"
-            title="Related Articles"
-            align="left"
-            className="mb-10"
-          />
-          <div className="grid gap-8 sm:grid-cols-2">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Keep Reading"
+              title="Related Articles"
+              align="left"
+              className="mb-10"
+            />
+          </Reveal>
+          <StaggerGroup className="grid gap-8 sm:grid-cols-2">
             {related.map((p) => (
-              <BlogCard key={p.slug} post={p} />
+              <StaggerItem key={p.slug} className="h-full">
+                <BlogCard post={p} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       )}
     </section>
