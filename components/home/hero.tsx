@@ -32,7 +32,7 @@ export function Hero() {
 
         <h1 className="max-w-4xl font-serif text-5xl font-semibold leading-[1.02] text-balance text-primary-foreground sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
           The History of{' '}
-          <span className="text-shimmer">Lord Neil Benjamin Gibson</span>
+          <span className="text-shimme">Lord Neil Benjamin Gibson</span>
         </h1>
 
         <p className="mt-8 max-w-xl text-lg leading-relaxed text-primary-foreground/75 sm:text-xl">
