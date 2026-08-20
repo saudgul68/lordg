@@ -139,6 +139,17 @@
 // //     .sort((a, b) => (a.category === current?.category ? -1 : 1))
 // //     .slice(0, limit)
 // // }
+
+export const POSTS_PER_PAGE = 4
+
+export function getPaginatedPosts(page: number, perPage = POSTS_PER_PAGE) {
+  const all = getAllPosts()
+  const totalPages = Math.ceil(all.length / perPage)
+  const currentPage = Math.max(1, Math.min(page, totalPages))
+  const start = (currentPage - 1) * perPage
+  const items = all.slice(start, start + perPage)
+  return { items, totalPages, currentPage, total: all.length }
+}
 // // export type BlogPost = {
 // //   slug: string
 // //   title: string

@@ -2,8 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
-import { ArticleHeader } from '@/components/blog/article-header'
-import { ArticleBody } from '@/components/blog/article-body'
+import { ArticleClient } from '@/components/blog/article-client'
 import { getAllPosts, getPostBySlug, getRelatedPosts } from '@/lib/blog'
 
 export function generateStaticParams() {
@@ -40,8 +39,7 @@ export default async function BlogPostPage({
     <>
       <SiteHeader />
       <main>
-        <ArticleHeader post={post} />
-        <ArticleBody post={post} related={related} />
+        <ArticleClient post={post} related={related} />
       </main>
       <SiteFooter />
     </>
