@@ -75,7 +75,7 @@ export function Hero() {
               </span>
             </div>
           ))}
-        </div>
+      </div>
       </div>
 
       <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 sm:block">

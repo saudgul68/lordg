@@ -18,14 +18,14 @@ export function AboutStory() {
         <Reveal direction="left">
           <div className="group relative aspect-[3/4] overflow-hidden rounded-3xl shadow-2xl ring-1 ring-border lg:sticky lg:top-28">
             <Image
-              src="/walton-hall.png"
+              src="/waltonhall.png"
               alt="Walton Hall, birthplace connection of Lord Neil Gibson"
               fill
               className="object-cover transition-transform duration-[1.2s] group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent" />
 
-            <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-3">
+            {/* <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-3">
               {facts.map(({ Icon, label, value }) => (
                 <div
                   key={label}
@@ -42,7 +42,7 @@ export function AboutStory() {
                   </div>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </Reveal>
 
