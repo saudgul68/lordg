@@ -115,16 +115,15 @@ export function SiteFooter() {
                 <MapPin className="size-4" />
               </span>
               <span className="leading-relaxed">
-                Arawak Chamber, Mandar House, 3rd Floor, Johnsons Ghut, Tortola
-                Central, VG1110, BVI
+              Jessups, Jessups Estate, P.O. Box 590, Nevis St Kitts.
               </span>
             </li>
             <li className="flex gap-3">
               <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary-foreground/5 text-accent">
                 <Phone className="size-4" />
               </span>
-              <a href="tel:+447887447527" className="transition-colors hover:text-primary-foreground">
-                +44 7887 447527
+              <a href="tel:+18185750663" className="transition-colors hover:text-primary-foreground">
+              +1 818 575 0663
               </a>
             </li>
             <li className="flex gap-3">

@@ -6,13 +6,13 @@ const details = [
   {
     Icon: MapPin,
     label: 'Address',
-    lines: ['Arawak Chamber, Mandar House, 3rd Floor', 'Johnsons Ghut, Tortola Central, VG1110, BVI'],
+    lines: ['Jessups, Jessups Estate, P.O. Box 590, Nevis St Kitts.'],
   },
   {
     Icon: Phone,
     label: 'Phone Number',
-    lines: ['+44 7887 447527'],
-    href: 'tel:+447887447527',
+    lines: ['+1 818 575 0663'],
+    href: 'tel:+18185750663',
   },
   {
     Icon: Mail,

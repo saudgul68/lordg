@@ -140,7 +140,7 @@
 // //     .slice(0, limit)
 // // }
 
-export const POSTS_PER_PAGE = 4
+export const POSTS_PER_PAGE = 6
 
 export function getPaginatedPosts(page: number, perPage = POSTS_PER_PAGE) {
   const all = getAllPosts()

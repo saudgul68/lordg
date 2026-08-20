@@ -1,19 +1,37 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useState, useTransition, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { CircleCheck as CheckCircle2, Send } from 'lucide-react'
+import { CircleCheck as CheckCircle2, Loader2, Send } from 'lucide-react'
+import { submitContactForm } from '@/app/actions/contact'
 import { Button } from '@/components/ui/button'
 
 const fieldClass =
-  'w-full rounded-xl border border-input bg-card px-4 py-3.5 text-sm text-foreground shadow-sm outline-none transition-all placeholder:text-muted-foreground/60 focus:border-accent focus:ring-2 focus:ring-accent/20 hover:border-accent/40'
+  'w-full rounded-xl border border-input bg-card px-4 py-3.5 text-sm text-foreground shadow-sm outline-none transition-all placeholder:text-muted-foreground/60 focus:border-accent focus:ring-2 focus:ring-accent/20 hover:border-accent/40 disabled:cursor-not-allowed disabled:opacity-60'
 
 export function ContactForm() {
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isPending, startTransition] = useTransition()
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setSent(true)
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    setError(null)
+
+    startTransition(async () => {
+      const result = await submitContactForm(formData)
+
+      if (result.success) {
+        form.reset()
+        setSent(true)
+        return
+      }
+
+      setError(result.error)
+    })
   }
 
   return (
@@ -69,7 +87,15 @@ export function ContactForm() {
               <label htmlFor="name" className="text-sm font-medium">
                 Full name
               </label>
-              <input id="name" name="name" required className={fieldClass} placeholder="Jane Doe" />
+              <input
+                id="name"
+                name="name"
+                required
+                disabled={isPending}
+                maxLength={120}
+                className={fieldClass}
+                placeholder="Jane Doe"
+              />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 10 }}
@@ -85,6 +111,7 @@ export function ContactForm() {
                 name="email"
                 type="email"
                 required
+                disabled={isPending}
                 className={fieldClass}
                 placeholder="you@example.com"
               />
@@ -104,6 +131,8 @@ export function ContactForm() {
               id="subject"
               name="subject"
               required
+              disabled={isPending}
+              maxLength={200}
               className={fieldClass}
               placeholder="How can we help?"
             />
@@ -122,11 +151,22 @@ export function ContactForm() {
               id="message"
               name="message"
               required
+              disabled={isPending}
+              maxLength={5000}
               rows={6}
               className={`${fieldClass} resize-none`}
               placeholder="Write your message..."
             />
           </motion.div>
+
+          {error && (
+            <p
+              role="alert"
+              className="mt-5 rounded-xl border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive"
+            >
+              {error}
+            </p>
+          )}
 
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -136,10 +176,20 @@ export function ContactForm() {
             <Button
               type="submit"
               size="lg"
+              disabled={isPending}
               className="group mt-7 h-13 w-full rounded-full bg-primary px-8 text-base text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/25 sm:w-auto"
             >
-              Send Message
-              <Send className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              {isPending ? (
+                <>
+                  Sending...
+                  <Loader2 className="size-4 animate-spin" />
+                </>
+              ) : (
+                <>
+                  Send Message
+                  <Send className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </>
+              )}
             </Button>
           </motion.div>
         </motion.form>
