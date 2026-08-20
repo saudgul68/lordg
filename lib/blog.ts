@@ -2722,18 +2722,41 @@ const dummyImages: Record<string, string> = {
   'lord-neil-gibson-ambassador-of-goodwill': 'https://images.pexels.com/photos/7156172/pexels-photo-7156172.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
 }
 
+function mapPostImage(post: BlogPost): BlogPost {
+  return { ...post, image: dummyImages[post.slug] ?? post.image }
+}
+
 export function getAllPosts() {
-  return posts.map((p) => ({ ...p, image: dummyImages[p.slug] ?? p.image }))
+  return posts.map(mapPostImage)
 }
 
 export function getPostBySlug(slug: string) {
-  return posts.find((p) => p.slug === slug)
+  const post = posts.find((p) => p.slug === slug)
+  if (!post) return undefined
+  return mapPostImage(post)
 }
 
 export function getRelatedPosts(slug: string, limit = 2) {
   const current = getPostBySlug(slug)
-  return posts
+  return getAllPosts()
     .filter((p) => p.slug !== slug)
-    .sort((a, b) => (a.category === current?.category ? -1 : 1))
+    .sort((a, b) => {
+      if (a.category === current?.category && b.category !== current?.category)
+        return -1
+      if (b.category === current?.category && a.category !== current?.category)
+        return 1
+      return 0
+    })
     .slice(0, limit)
+}
+
+export function getAdjacentPosts(slug: string) {
+  const all = getAllPosts()
+  const index = all.findIndex((p) => p.slug === slug)
+  if (index === -1) return { previous: null, next: null }
+
+  return {
+    previous: index < all.length - 1 ? all[index + 1] : null,
+    next: index > 0 ? all[index - 1] : null,
+  }
 }
