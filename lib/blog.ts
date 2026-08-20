@@ -2672,8 +2672,58 @@ export const posts: BlogPost[] = [
   },
 ]
 
+const dummyImages: Record<string, string> = {
+  'seed-foundation-membership-benefits': 'https://images.pexels.com/photos/1143521/pexels-photo-1143521.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'seed-foundation-what-can-it-do': 'https://images.pexels.com/photos/5833312/pexels-photo-5833312.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'seed-foundation-why-is-it': 'https://images.pexels.com/photos/38649010/pexels-photo-38649010.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'seed-foundation-what-is-it': 'https://images.pexels.com/photos/5833273/pexels-photo-5833273.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'seed-foundation-overview-lord-neil-gibson': 'https://images.pexels.com/photos/8052246/pexels-photo-8052246.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-west-africa': 'https://images.pexels.com/photos/262353/pexels-photo-262353.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-building-manpower-community-lesotho': 'https://images.pexels.com/photos/37513826/pexels-photo-37513826.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'new-airline-service-to-lesotho': 'https://images.pexels.com/photos/23897576/pexels-photo-23897576.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-project-lesotho-diamonds': 'https://images.pexels.com/photos/20427051/pexels-photo-20427051.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-work-in-lesotho': 'https://images.pexels.com/photos/12216207/pexels-photo-12216207.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-africa-and-the-world': 'https://images.pexels.com/photos/15570541/pexels-photo-15570541.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'europe-factors-to-watch-shares-set-to-reverse-gains': 'https://images.pexels.com/photos/534216/pexels-photo-534216.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'belize-eco-village-housing-project': 'https://images.pexels.com/photos/38375235/pexels-photo-38375235.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'fight-night-cinco-de-mayo-las-vegas': 'https://images.pexels.com/photos/36790388/pexels-photo-36790388.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'credit-suisse-buys-morgan-stanley-wealth-unit': 'https://images.pexels.com/photos/16594724/pexels-photo-16594724.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'best-of-las-vegas-awards-reveal-the-winner': 'https://images.pexels.com/photos/161772/las-vegas-nevada-cities-urban-161772.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'alternative-energy-investing-2013': 'https://images.pexels.com/photos/9800092/pexels-photo-9800092.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'belize-housing-ralph-huang-first-interstate-group': 'https://images.pexels.com/photos/17627997/pexels-photo-17627997.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'energy-belize-project-alpha-part-2': 'https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'energy-belize-project-alpha-part-1': 'https://images.pexels.com/photos/35105437/pexels-photo-35105437.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'partnership-to-form-belize-energy-co': 'https://images.pexels.com/photos/35105432/pexels-photo-35105432.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'handels-securities-and-lord-neil-gibson-belize-project': 'https://images.pexels.com/photos/35105428/pexels-photo-35105428.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-handels-securities-belize-energy-project': 'https://images.pexels.com/photos/29056690/pexels-photo-29056690.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'hydroelectric-and-wind-power-for-lesotho': 'https://images.pexels.com/photos/35105427/pexels-photo-35105427.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'water-is-lesothos-most-precious-natural-resource': 'https://images.pexels.com/photos/29595709/pexels-photo-29595709.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'project-lesotho-kingdom-in-the-sky': 'https://images.pexels.com/photos/38254034/pexels-photo-38254034.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'project-lesotho-overview': 'https://images.pexels.com/photos/37684102/pexels-photo-37684102.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'victim-of-an-internet-stalker': 'https://images.pexels.com/photos/5833326/pexels-photo-5833326.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'handels-securities-lesotho-project': 'https://images.pexels.com/photos/28206028/pexels-photo-28206028.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-adventures-around-the-world': 'https://images.pexels.com/photos/6994983/pexels-photo-6994983.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'bullriding-in-belize-lord-neil-gibson': 'https://images.pexels.com/photos/5784845/pexels-photo-5784845.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'belize-eco-village-modular-design-scalability': 'https://images.pexels.com/photos/33537946/pexels-photo-33537946.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-b-gibson-and-the-world': 'https://images.pexels.com/photos/31922550/pexels-photo-31922550.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'what-is-lord-neil-gibson-doing-in-south-africa': 'https://images.pexels.com/photos/5833337/pexels-photo-5833337.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'who-will-win-the-las-vegas-arena-race': 'https://images.pexels.com/photos/35120571/pexels-photo-35120571.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'south-africa-diamond-mine-lesotho-project': 'https://images.pexels.com/photos/30855641/pexels-photo-30855641.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'fate-of-giant-las-vegas-ferris-wheel': 'https://images.pexels.com/photos/444964/pexels-photo-444964.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'us-bonds-edge-higher-on-europe-fears': 'https://images.pexels.com/photos/27459671/pexels-photo-27459671.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'home-prices-rise-in-most-major-us-cities': 'https://images.pexels.com/photos/14998334/pexels-photo-14998334.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-bringing-relief-to-iraq': 'https://images.pexels.com/photos/7156169/pexels-photo-7156169.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-partners-with-twin-peaks': 'https://images.pexels.com/photos/7316668/pexels-photo-7316668.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'who-is-lord-neil-b-gibson': 'https://images.pexels.com/photos/7947742/pexels-photo-7947742.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-in-the-usa': 'https://images.pexels.com/photos/6646868/pexels-photo-6646868.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-working-with-royalty': 'https://images.pexels.com/photos/38643254/pexels-photo-38643254.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'change-the-world-one-shipping-container-at-a-time': 'https://images.pexels.com/photos/13025947/pexels-photo-13025947.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-exploits-around-the-globe': 'https://images.pexels.com/photos/6646926/pexels-photo-6646926.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  'lord-neil-gibson-ambassador-of-goodwill': 'https://images.pexels.com/photos/7156172/pexels-photo-7156172.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+}
+
 export function getAllPosts() {
-  return posts
+  return posts.map((p) => ({ ...p, image: dummyImages[p.slug] ?? p.image }))
 }
 
 export function getPostBySlug(slug: string) {

@@ -17,6 +17,29 @@ type Props = {
   featured: BlogPost
 }
 
+function getPageList(current: number, total: number): (number | 'ellipsis')[] {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, i) => i + 1)
+  }
+
+  const pages: (number | 'ellipsis')[] = [1]
+
+  if (current > 3) pages.push('ellipsis')
+
+  const start = Math.max(2, current - 1)
+  const end = Math.min(total - 1, current + 1)
+
+  for (let i = start; i <= end; i++) {
+    pages.push(i)
+  }
+
+  if (current < total - 2) pages.push('ellipsis')
+
+  pages.push(total)
+
+  return pages
+}
+
 export function BlogListClient({ posts, featured }: Props) {
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(true)
@@ -109,24 +132,30 @@ export function BlogListClient({ posts, featured }: Props) {
                 <ChevronLeft className="size-5" />
               </button>
 
-              {Array.from({ length: totalPages }).map((_, i) => {
-                const pageNum = i + 1
-                return (
+              {getPageList(page, totalPages).map((item, i) =>
+                item === 'ellipsis' ? (
+                  <span
+                    key={`ellipsis-${i}`}
+                    className="inline-flex size-11 items-center justify-center text-muted-foreground"
+                  >
+                    &hellip;
+                  </span>
+                ) : (
                   <button
-                    key={pageNum}
+                    key={item}
                     type="button"
-                    onClick={() => goToPage(pageNum)}
+                    onClick={() => goToPage(item)}
                     className={cn(
                       'inline-flex size-11 items-center justify-center rounded-full border text-sm font-semibold transition-all',
-                      pageNum === page
+                      item === page
                         ? 'border-primary bg-primary text-primary-foreground shadow-md'
                         : 'border-border bg-card text-muted-foreground hover:border-accent/40 hover:bg-secondary hover:text-foreground',
                     )}
                   >
-                    {pageNum}
+                    {item}
                   </button>
-                )
-              })}
+                ),
+              )}
 
               <button
                 type="button"
